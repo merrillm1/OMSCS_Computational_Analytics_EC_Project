@@ -54,26 +54,28 @@ def check_for_user_activity_over_time_period(df, user_col, time_col, class_col, 
                 if i+3 == len(visits): # if the length is equal to 3 days, finalize loop here
 
                     if ((visits[time_col].values[i+2] - visits[time_col].values[i]) <= timedelta(days=time_period)):
-
-                        adopted_users = adopted_users.append({user_col: user, class_col: 1}, ignore_index=True)
+                        classif = pd.DataFrame({user_col: user, class_col: 1}, index=[0])
+                        adopted_users = pd.concat([adopted_users, classif], ignore_index=True)
                         break
 
                     else:
-                        adopted_users = adopted_users.append({user_col: user, class_col: 0}, ignore_index=True)
+                        classif = pd.DataFrame({user_col: user, class_col: 0}, index=[0])
+                        adopted_users = pd.concat([adopted_users, classif], ignore_index=True)
                         break
 
                 elif i+3 < len(visits): # if the length is more than 3 days, loop through unless labaled adopted
 
                     if ((visits[time_col].values[i+2] - visits[time_col].values[i]) <= timedelta(days=time_period)):
-                        adopted_users = adopted_users.append({user_col: user, class_col: 1}, ignore_index=True)
+                        classif = pd.DataFrame({user_col: user, class_col: 1}, index=[0])
+                        adopted_users = pd.concat([adopted_users, classif], ignore_index=True)
                         break
 
                     else:
                         continue
 
             elif i+3 > len(visits): # if the number of visits is less than three days, mark as not adopted
-
-                adopted_users = adopted_users.append({user_col: user, class_col: 0}, ignore_index=True)
+                classif = pd.DataFrame({user_col: user, class_col: 0}, index=[0])
+                adopted_users = pd.concat([adopted_users, classif], ignore_index=True)
                 break
     
     return adopted_users
