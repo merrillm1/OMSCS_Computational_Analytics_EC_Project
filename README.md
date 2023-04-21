@@ -1,6 +1,6 @@
 ## Results
 
-The aim of this challenge is to predict the factors that contribute most to user adoption. User adoption here is defined as a user who has logged in at least three times within *any* 7 day period. Factors here include the following:
+The aim of this project is to predict the factors that contribute most to user adoption. User adoption here is defined as a user who has logged in at least three times within *any* 7 day period. Factors here include the following:
 
     - name:  the  user's  name
     - object_id:   the  user's  id
